@@ -1,0 +1,13 @@
+{
+	"navbar": {
+		"topInfo": {
+			"orderMessage": "Call or WhatsApp to order any of our products",
+			"orderNumber": "+880XXXXXXXXX",
+			"hotlineMessage": "Hotline",
+			"hotlineNumber": "0XXXX-XXXXXX"
+		}
+	},
+	"homepage": {
+		"title": "Welcome to Next.js!"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"navbar": {
+		"topInfo": {
+			"orderMessage": "আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন",
+			"orderNumber": "+880XXXXXXXXX",
+			"hotlineMessage": "হট লাইন",
+			"hotlineNumber": "0XXXX-XXXXXX"
+		}
+	},
+	"homepage": {
+		"title": "Next.js এ স্বাগতম"
+	}
+}
