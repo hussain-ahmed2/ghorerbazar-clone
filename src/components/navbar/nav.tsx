@@ -10,7 +10,7 @@ import { useHideOnScroll } from "@/hooks/use-hide-on-scroll";
 import NavbarTopInfo from "./navbar-top-info";
 import PopularCategories from "./popular-categories";
 
-export default function Nav({ locale }: { locale: string }) {
+export default function Nav({ locale, categories }: { locale: string; categories: string[] }) {
 	const { showNavbar, showTopInfo } = useHideOnScroll();
 
 	return (
@@ -28,7 +28,7 @@ export default function Nav({ locale }: { locale: string }) {
 				)}
 			</AnimatePresence>
 
-			<div className="flex items-center justify-between max-w-6xl mx-auto min-h-20">
+			<div className="flex items-center justify-between max-w-6xl mx-auto min-h-20 px-4">
 				<NavbarSearchMenu />
 				<Link href="/">
 					<Logo />
@@ -39,7 +39,7 @@ export default function Nav({ locale }: { locale: string }) {
 				</div>
 			</div>
 
-			<PopularCategories />
+			<PopularCategories categories={categories} />
 		</motion.nav>
 	);
 }

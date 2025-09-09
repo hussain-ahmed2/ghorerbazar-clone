@@ -8,6 +8,8 @@
 		}
 	},
 	"homepage": {
-		"title": "Welcome to Next.js!"
+		"title": "Welcome to Next.js!",
+		"featuredProductsTitle": "Featured Products",
+		"featuredProductsDescription": "Check out our featured products on this page"
 	}
 }

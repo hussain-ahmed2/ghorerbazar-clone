@@ -8,6 +8,8 @@
 		}
 	},
 	"homepage": {
-		"title": "Next.js এ স্বাগতম"
+		"title": "Next.js এ স্বাগতম",
+		"featuredProductsTitle": "বিশেষ পণ্যসমূহ",
+		"featuredProductsDescription": "এই পৃষ্ঠায় আমাদের বিশেষ পণ্যসমূহ দেখুন"
 	}
 }

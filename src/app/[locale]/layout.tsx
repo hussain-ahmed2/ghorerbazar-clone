@@ -52,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 			<body className={`${natoSansBengali.className} antialiased`}>
 				<NextIntlClientProvider>
 					<Navbar />
-					<main className="bg-accent">{children}</main>
+					<main className="bg-accent flex flex-col min-h-screen w-full overflow-hidden">{children}</main>
 				</NextIntlClientProvider>
 			</body>
 		</html>
