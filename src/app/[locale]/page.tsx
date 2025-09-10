@@ -1,6 +1,7 @@
 import { getProducts } from "@/actions/product.action";
 import Banner from "@/components/homepage/banner";
 import FeaturedProducts from "@/components/homepage/featured-products";
+import { Button } from "@/components/ui/button";
 import { getTranslations } from "next-intl/server";
 
 export default async function HomePage({ searchParams }: PageProps<"/[locale]">) {
@@ -17,6 +18,9 @@ export default async function HomePage({ searchParams }: PageProps<"/[locale]">)
 				<h2 className="text-2xl font-bold">{t("featuredProductsTitle")}</h2>
 				<p className="text-muted-foreground mt-2 mb-4">{t("featuredProductsDescription")}</p>
 				<FeaturedProducts products={products} />
+				<Button className="mt-6 mx-auto block" variant="outline" size="lg">
+					{t("viewMore")}
+				</Button>
 			</section>
 		</div>
 	);

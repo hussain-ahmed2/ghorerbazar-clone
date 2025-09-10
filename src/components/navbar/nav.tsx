@@ -14,7 +14,7 @@ export default function Nav({ locale, categories }: { locale: string; categories
 	const { showNavbar, showTopInfo } = useHideOnScroll();
 
 	return (
-		<motion.nav initial={{ y: 0 }} animate={{ y: showNavbar ? 0 : "-100%" }} transition={{ duration: 0.3, ease: "easeInOut" }} className="fixed top-0 left-0 w-full bg-background z-50">
+		<motion.nav initial={{ y: 0 }} animate={{ y: showNavbar ? 0 : "-100%" }} transition={{ duration: 0.3, ease: "easeInOut" }} className="fixed top-0 left-0 w-full bg-background z-50 shadow-xs">
 			<AnimatePresence>
 				{showTopInfo && (
 					<motion.div

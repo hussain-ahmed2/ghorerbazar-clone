@@ -7,6 +7,7 @@ import "../globals.css";
 import { Metadata } from "next";
 import Navbar from "@/components/navbar/navbar";
 import { getLocale } from "next-intl/server";
+import Footer from "@/components/footer/footer";
 
 export const natoSansBengali = Noto_Sans_Bengali({
 	subsets: ["bengali", "latin", "latin-ext"],
@@ -53,6 +54,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 				<NextIntlClientProvider>
 					<Navbar />
 					<main className="bg-accent flex flex-col min-h-screen w-full overflow-hidden">{children}</main>
+					<Footer />
 				</NextIntlClientProvider>
 			</body>
 		</html>
