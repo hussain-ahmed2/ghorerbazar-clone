@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Search, ShoppingBag, User2 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Logo from "../logo";
 import { Input } from "../ui/input";
 import { useRef, useEffect, useState } from "react";

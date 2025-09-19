@@ -1,5 +1,5 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type Props = { href: string; children: React.ReactNode; tooltip: string };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import NavbarSearchMenu from "./navbar-search-menu";
 import Logo from "../logo";
 import NavbarRightSideIconMenus from "./navbar-right-side-icon-menus";

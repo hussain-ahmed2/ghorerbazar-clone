@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function PopularCategories({ categories }: { categories: string[] }) {
 	return (
