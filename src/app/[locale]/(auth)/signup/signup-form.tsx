@@ -1,14 +1,14 @@
 "use client";
 
 import { signup } from "@/actions/auth.action";
-import FiledError from "@/components/form/field-error";
 import InputField from "@/components/form/input-field";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { SignupSchema } from "@/lib/validation/user.validation";
+import { useAuthStore } from "@/store/auth.store";
 import { useTranslations } from "next-intl";
+import { redirect } from "next/navigation";
 import { useActionState } from "react";
+import { toast } from "sonner";
 
 const INITIAL_STATE = {
 	errors: { firstName: "", lastName: "", email: "", phone: "", password: "", confirmPassword: "", server: null } as SignupSchema & { server?: string | null },
@@ -20,11 +20,17 @@ type State = typeof INITIAL_STATE;
 export default function SignUpForm() {
 	const t = useTranslations("signUpPage");
 	const [state, formAction, isPending] = useActionState(submit, INITIAL_STATE);
+	const setUser = useAuthStore((state) => state.setUser);
 
 	async function submit(prevState: State, formData: FormData) {
 		const data = Object.fromEntries(formData) as SignupSchema;
 		const result = await signup(data);
-		if (result.success) return INITIAL_STATE;
+		if (result.success) {
+			setUser(result.data.user, true);
+			toast.success(result.message);
+			redirect("/account");
+		}
+		toast.error(result.message);
 		return { ...prevState, form: { ...prevState.form, ...data }, errors: { ...INITIAL_STATE.errors, ...result.errors } };
 	}
 

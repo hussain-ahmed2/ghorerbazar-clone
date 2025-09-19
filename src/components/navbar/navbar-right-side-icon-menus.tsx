@@ -4,6 +4,7 @@ import { ShoppingBag, User2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ToolTipLink from "../tooltip-link";
 import { useAuthStore } from "@/store/auth.store";
+import LogoutButton from "../auth/logout-button";
 
 export default function NavbarRightSideIconMenus() {
 	const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -20,6 +21,7 @@ export default function NavbarRightSideIconMenus() {
 					<ShoppingBag />
 				</Button>
 			</ToolTipLink>
+			<LogoutButton />
 		</div>
 	);
 }

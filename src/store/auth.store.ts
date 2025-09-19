@@ -7,7 +7,7 @@ type AuthState = {
 	isAuthenticated: boolean;
 	isAuthenticating: boolean;
 	checkAuth: () => void;
-	setUser: (user: UserType) => void;
+	setUser: (user: UserType | null, isAuthenticated?: boolean) => void;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -24,5 +24,5 @@ export const useAuthStore = create<AuthState>((set) => ({
 			set({ isAuthenticating: false });
 		}
 	},
-	setUser: (user: UserType | null) => set({ user }),
+	setUser: (user: UserType | null, isAuthenticated = false) => set({ user, isAuthenticated }),
 }));

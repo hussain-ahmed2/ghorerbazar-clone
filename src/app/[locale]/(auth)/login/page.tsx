@@ -7,7 +7,7 @@ export default async function page() {
 
 	return (
 		<div className="min-h-screen pb-10 flex items-center justify-center">
-			<section className="max-w-3xl w-full px-4 mt-50 mb-20">
+			<section className="max-w-3xl w-full px-4 mt-40 mb-20">
 				<h1 className="text-2xl md:text-4xl font-extrabold text-center">{t("title")}</h1>
 				<p className="text-center my-4 font-medium">{t("description")}</p>
 				<LoginForm />

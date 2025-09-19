@@ -8,6 +8,8 @@ import { Metadata } from "next";
 import Navbar from "@/components/navbar/navbar";
 import { getLocale } from "next-intl/server";
 import Footer from "@/components/footer/footer";
+import { Toaster } from "@/components/ui/sonner";
+import AuthLayout from "@/components/auth/auth-layout";
 
 export const natoSansBengali = Noto_Sans_Bengali({
 	subsets: ["bengali", "latin", "latin-ext"],
@@ -55,6 +57,8 @@ export default async function LocaleLayout({ children, params }: Props) {
 					<Navbar />
 					<main className="bg-accent flex flex-col min-h-screen w-full overflow-hidden">{children}</main>
 					<Footer />
+					<Toaster closeButton position="top-right" theme="light" richColors />
+					<AuthLayout />
 				</NextIntlClientProvider>
 			</body>
 		</html>
