@@ -5,8 +5,8 @@ import InputField from "@/components/form/input-field";
 import { Button } from "@/components/ui/button";
 import { LoginSchema } from "@/lib/validation/user.validation";
 import { useAuthStore } from "@/store/auth.store";
-import { useTranslations } from "next-intl";
-import { redirect } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { redirect } from "@/i18n/navigation";
 import { useActionState } from "react";
 import { toast } from "sonner";
 
@@ -19,6 +19,7 @@ type State = typeof INITIAL_STATE;
 
 export default function LoginForm() {
 	const t = useTranslations("loginPage");
+	const locale = useLocale();
 	const [state, formAction, isPending] = useActionState(submit, INITIAL_STATE);
 	const setUser = useAuthStore((state) => state.setUser);
 
@@ -28,7 +29,7 @@ export default function LoginForm() {
 		if (result.success) {
 			setUser(result.data.user, true);
 			toast.success(result.message);
-			redirect("/account");
+			return redirect({ href: "/account", locale });
 		}
 		toast.error(result.message);
 		return { ...prevState, form: { ...prevState.form, ...data }, errors: { ...INITIAL_STATE.errors, ...result.errors } };
