@@ -1,47 +1,46 @@
 "use client";
 
+import { signup } from "@/actions/auth.action";
+import FiledError from "@/components/form/field-error";
+import InputField from "@/components/form/input-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SignupSchema } from "@/lib/validation/user.validation";
 import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+
+const INITIAL_STATE = {
+	errors: { firstName: "", lastName: "", email: "", phone: "", password: "", confirmPassword: "", server: null } as SignupSchema & { server?: string | null },
+	form: { firstName: "", lastName: "", email: "", phone: "", password: "", confirmPassword: "" } as SignupSchema,
+};
+
+type State = typeof INITIAL_STATE;
 
 export default function SignUpForm() {
 	const t = useTranslations("signUpPage");
+	const [state, formAction, isPending] = useActionState(submit, INITIAL_STATE);
+
+	async function submit(prevState: State, formData: FormData) {
+		const data = Object.fromEntries(formData) as SignupSchema;
+		const result = await signup(data);
+		if (result.success) return INITIAL_STATE;
+		return { ...prevState, form: { ...prevState.form, ...data }, errors: { ...INITIAL_STATE.errors, ...result.errors } };
+	}
 
 	return (
-		<form action="" className="mt-6 space-y-4">
+		<form action={formAction} className="mt-6 space-y-4">
 			<div className="grid grid-cols-2 gap-4">
-				<div className="space-y-1">
-					<Label htmlFor="firstName">{t("fields.firstName")}</Label>
-					<Input className="bg-white border-neutral-300" id="firstName" name="firstName" />
-				</div>
-				<div className="space-y-1">
-					<Label htmlFor="lastName">{t("fields.lastName")}</Label>
-					<Input className="bg-white border-neutral-300" id="lastName" name="lastName" />
-				</div>
+				<InputField name="firstName" label={t("fields.firstName")} defaultValue={state.form.firstName} error={state.errors.firstName} />
+				<InputField name="lastName" label={t("fields.lastName")} defaultValue={state.form.lastName} error={state.errors.lastName} />
 			</div>
 
-			<div className="space-y-1">
-				<Label htmlFor="email">{t("fields.email")}</Label>
-				<Input className="bg-white border-neutral-300" id="email" type="email" name="email" />
-			</div>
+			<InputField name="email" label={t("fields.email")} defaultValue={state.form.email} error={state.errors.email} />
+			<InputField name="phone" label={t("fields.phone")} defaultValue={state.form.phone} error={state.errors.phone} />
+			<InputField name="password" label={t("fields.password")} defaultValue={state.form.password} error={state.errors.password} type="password" />
+			<InputField name="confirmPassword" label={t("fields.confirmPassword")} defaultValue={state.form.confirmPassword} error={state.errors.confirmPassword} type="password" />
 
-			<div className="space-y-1">
-				<Label htmlFor="phone">{t("fields.phone")}</Label>
-				<Input className="bg-white border-neutral-300" id="phone" type="tel" name="phone" />
-			</div>
-
-			<div className="space-y-1">
-				<Label htmlFor="password">{t("fields.password")}</Label>
-				<Input className="bg-white border-neutral-300" id="password" type="password" name="password" />
-			</div>
-
-			<div className="space-y-1">
-				<Label htmlFor="confirmPassword">{t("fields.confirmPassword")}</Label>
-				<Input className="bg-white border-neutral-300" id="confirmPassword" type="password" name="confirmPassword" />
-			</div>
-
-			<Button type="submit" className="w-full">
+			<Button disabled={isPending} type="submit" className="w-full">
 				{t("title")}
 			</Button>
 		</form>

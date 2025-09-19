@@ -34,7 +34,7 @@
 			"email": "ইমেইল",
 			"password": "পাসওয়ার্ড"
 		},
-		"dontHaveAccount": "অ্যাকাউন্ট নেই?",
+		"doNotHaveAccount": "অ্যাকাউন্ট নেই?",
 		"signUp": "সাইন আপ করুন"
 	},
 	"footer": {

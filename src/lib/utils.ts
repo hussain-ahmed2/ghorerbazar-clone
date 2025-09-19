@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import jwt from "jsonwebtoken";
 import { JWTPayload } from "@/types/user.type";
+import { $ZodIssue } from "zod/v4/core";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -37,4 +38,12 @@ export function verifyRefreshToken(token: string) {
 
 export function makeJson<T>(data: T): T {
 	return JSON.parse(JSON.stringify(data));
+}
+
+export function getZErrors(issues: $ZodIssue[]) {
+	const errors = {} as { [key: string]: string };
+	for (const error of issues) {
+		errors[error.path[0] as string] = error.message;
+	}
+	return errors;
 }

@@ -9,21 +9,23 @@ import { motion, AnimatePresence } from "motion/react";
 import { useHideOnScroll } from "@/hooks/use-hide-on-scroll";
 import NavbarTopInfo from "./navbar-top-info";
 import PopularCategories from "./popular-categories";
+import { useState } from "react";
 
 export default function Nav({ locale, categories }: { locale: string; categories: string[] }) {
+	const [showInfo, setShowInfo] = useState(true);
 	const { showNavbar, showTopInfo } = useHideOnScroll();
 
 	return (
 		<motion.nav initial={{ y: 0 }} animate={{ y: showNavbar ? 0 : "-100%" }} transition={{ duration: 0.3, ease: "easeInOut" }} className="fixed top-0 left-0 w-full bg-background z-50 shadow-xs">
 			<AnimatePresence>
-				{showTopInfo && (
+				{showTopInfo && showInfo && (
 					<motion.div
 						initial={{ height: 0, opacity: 0 }}
 						animate={{ height: "auto", opacity: 1 }}
 						exit={{ height: 0, opacity: 0 }}
 						transition={{ duration: 0.3, ease: "easeInOut" }}
 						style={{ overflow: "hidden" }}>
-						<NavbarTopInfo />
+						<NavbarTopInfo onClose={() => setShowInfo(false)} />
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -39,7 +41,7 @@ export default function Nav({ locale, categories }: { locale: string; categories
 				</div>
 			</div>
 
-			<PopularCategories categories={categories} />
+			{/* <PopularCategories categories={categories} /> */}
 		</motion.nav>
 	);
 }

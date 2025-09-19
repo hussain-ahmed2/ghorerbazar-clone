@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -7,8 +9,10 @@ import Logo from "../logo";
 import { Input } from "../ui/input";
 import { useRef, useEffect, useState } from "react";
 import ToolTipLink from "../tooltip-link";
+import { useAuthStore } from "@/store/auth.store";
 
 export default function NavbarSearchMenu() {
+	const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 	const [isOpen, setIsOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -72,7 +76,7 @@ export default function NavbarSearchMenu() {
 								</Button>
 							</div>
 							<div className="flex items-center gap-2">
-								<ToolTipLink href="/account" tooltip="Account">
+								<ToolTipLink href={isAuthenticated ? "/account" : "/login"} tooltip="Account">
 									<Button onClick={() => setIsOpen(false)} className="cursor-pointer" variant="ghost" size="icon">
 										<User2 />
 									</Button>
