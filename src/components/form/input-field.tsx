@@ -10,9 +10,10 @@ type Props = {
 	label: string;
 	error: string;
 	type?: HTMLInputTypeAttribute;
+	disabled?: boolean;
 };
 
-export default function InputField({ name, defaultValue, label, type = "text", error }: Props) {
+export default function InputField({ name, defaultValue, label, type = "text", error, disabled = false }: Props) {
 	return (
 		<div className="space-y-1">
 			<Label htmlFor={name}>{label}</Label>
@@ -24,6 +25,7 @@ export default function InputField({ name, defaultValue, label, type = "text", e
 				id={name}
 				name={name}
 				defaultValue={defaultValue}
+				disabled={disabled}
 			/>
 			<FiledError error={error} />
 		</div>

@@ -2,7 +2,7 @@
 
 import { connectDB } from "@/lib/connection";
 import { getZErrors, makeJson } from "@/lib/utils";
-import { loginSchema, LoginSchema, signupSchema, SignupSchema } from "@/lib/validation/user.validation";
+import { loginSchema, LoginSchema, signupSchema, SignupSchema, updateUserSchema, UpdateUserSchema } from "@/lib/validation/user.validation";
 import User, { IUser } from "@/models/user.model";
 import { UserType } from "@/types/user.type";
 import { setCookie } from "./cookie.action";
@@ -85,6 +85,30 @@ export async function logout() {
 		await setCookie("access_token", "");
 		await setCookie("refresh_token", "");
 		return { success: true, message: "Successfully logged out!" };
+	} catch (error) {
+		console.log(error);
+		return { success: false, message: "Something went wrong!", errors: { server: "Something went wrong!" } };
+	}
+}
+
+export async function updateUser(data: UpdateUserSchema, id: string): Promise<E | S> {
+	try {
+		// validate data
+		const result = updateUserSchema.safeParse(data);
+		if (!result.success) return { success: false, message: "Invalid data", errors: getZErrors(result.error.issues) };
+
+		// destructure data
+		const { firstName, lastName, phone, address } = result.data;
+		const fullName = `${firstName} ${lastName}`;
+
+		// connect to db
+		await connectDB();
+
+		// find and update user
+		const user: IUser | null = await User.findByIdAndUpdate(id, { firstName, lastName, fullName, phone, address }, { new: true });
+		if (!user) return { success: false, message: "Something went wrong!", errors: { server: "Something went wrong!" } };
+
+		return { success: true, message: "Successfully updated user!", data: { user: makeJson(user) } };
 	} catch (error) {
 		console.log(error);
 		return { success: false, message: "Something went wrong!", errors: { server: "Something went wrong!" } };

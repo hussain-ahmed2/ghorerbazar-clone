@@ -1,13 +1,14 @@
+import Header from "@/components/auth/account/header";
 import { getTranslations } from "next-intl/server";
+import AccountInfo from "./account-info";
 
 export default async function page() {
 	const t = await getTranslations("accountPage");
 
 	return (
-		<div className="pt-30 px-4">
-			<section>
-				<h1 className="text-2xl md:text-4xl font-extrabold max-md:text-center">{t("title")}</h1>
-			</section>
-		</div>
+		<section className="flex flex-col flex-1 gap-4">
+			<Header title={t("title")} description={t("description")} />
+			<AccountInfo />
+		</section>
 	);
 }

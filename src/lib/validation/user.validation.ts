@@ -29,3 +29,7 @@ export type SignupSchema = z.infer<typeof signupSchema>;
 export const loginSchema = userSchema.pick({ email: true, password: true });
 
 export type LoginSchema = z.infer<typeof loginSchema>;
+
+export const updateUserSchema = userSchema.pick({ firstName: true, lastName: true, phone: true, address: true });
+
+export type UpdateUserSchema = z.infer<typeof updateUserSchema>;

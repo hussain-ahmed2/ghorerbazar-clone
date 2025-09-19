@@ -39,7 +39,26 @@
 	},
 	"accountPage": {
 		"title": "Account",
-		"description": "Manage your account settings and preferences."
+		"description": "Manage your account settings and preferences.",
+		"sidebar": {
+			"account": "Account",
+			"orders": "Orders",
+			"wishlist": "Wishlist",
+			"settings": "Settings"
+		},
+		"fields": {
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"email": "Email",
+			"phone": "Phone",
+			"address": "Address"
+		},
+		"buttons": {
+			"editProfile": "Edit Profile",
+			"saveChanges": "Save Changes",
+			"savingChanges": "Saving Changes...",
+			"cancelEditing": "Cancel Editing"
+		}
 	},
 	"footer": {
 		"title": "Ghorer Bazar: Your Trusted Source for Safe & Organic Food",
