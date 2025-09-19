@@ -45,19 +45,19 @@ export default function AccountInfo() {
 
 	return (
 		<div className="flex-1 h-full flex flex-col">
-			<div className="flex justify-end gap-4">
+			<div className="flex justify-end max-sm:justify-center gap-2 sm:gap-4">
 				{isEditing && (
 					<>
-						<Button disabled={isPending} className={cn("")} variant="default" type="submit" form="account">
+						<Button disabled={isPending} className={cn("line-clamp-1 max-sm:text-xs")} variant="default" type="submit" form="account">
 							{t(isPending ? "buttons.savingChanges" : "buttons.saveChanges")}
 						</Button>
-						<Button disabled={isPending} className={cn("bg-rose-600 hover:bg-rose-500")} variant="default" onClick={toggleEditing}>
+						<Button disabled={isPending} className={cn("bg-rose-600 hover:bg-rose-500 line-clamp-1 max-sm:text-xs")} variant="default" onClick={toggleEditing}>
 							{t("buttons.cancelEditing")}
 						</Button>
 					</>
 				)}
 				{!isEditing && (
-					<Button disabled={isPending} variant="default" onClick={toggleEditing}>
+					<Button className="line-clamp-1 max-sm:text-xs" disabled={isPending} variant="default" onClick={toggleEditing}>
 						{t("buttons.editProfile")}
 					</Button>
 				)}
@@ -71,11 +71,11 @@ export default function AccountInfo() {
 						</Avatar>
 					</Label>
 				</div>
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid sm:grid-cols-2 gap-4">
 					<InputField name="firstName" label={t("fields.firstName")} defaultValue={user?.firstName} error={state.errors?.firstName} disabled={!isEditing} />
 					<InputField name="lastName" label={t("fields.lastName")} defaultValue={user?.lastName} error={state.errors?.lastName} disabled={!isEditing} />
 				</div>
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid sm:grid-cols-2 gap-4">
 					<InputField name="email" label={t("fields.email")} defaultValue={user?.email} error="" disabled />
 					<InputField name="phone" label={t("fields.phone")} defaultValue={user?.phone} error={state.errors?.phone} disabled={!isEditing} />
 				</div>

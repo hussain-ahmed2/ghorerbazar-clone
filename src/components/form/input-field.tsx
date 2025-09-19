@@ -15,10 +15,10 @@ type Props = {
 
 export default function InputField({ name, defaultValue, label, type = "text", error, disabled = false }: Props) {
 	return (
-		<div className="space-y-1">
+		<div className="space-y-1 flex flex-col">
 			<Label htmlFor={name}>{label}</Label>
 			<Input
-				className={cn("bg-white border-neutral-300", {
+				className={cn("bg-white border-neutral-300 w-full", {
 					"border-rose-300 focus:!border-rose-400 focus:!ring-rose-200": error,
 				})}
 				type={type}
