@@ -1,7 +1,6 @@
 "use client";
 
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
@@ -16,27 +15,23 @@ export default function SideBar() {
 	const pathname = usePathname();
 	const t = useTranslations("accountPage");
 	const selected = routes[pathname as keyof typeof routes];
-	const router = useRouter();
 
 	return (
-		<aside className={cn("flex flex-col gap-2 h-full sm:min-w-48")}>
-			<Select onValueChange={(value) => router.push(value)}>
-				<SelectTrigger className="shadow-none min-w-48 w-full">
-					<SelectValue placeholder={t(selected)} />
-				</SelectTrigger>
+		<aside className={cn("flex flex-col gap-2 md:h-full md:min-w-48")}>
+			<div className="text-xs grid grid-cols-4 text-center md:hidden">
+				{Object.entries(routes).map(([route, label]) => (
+					<Link
+						key={route}
+						className={cn("py-2 font-medium rounded-md hover:bg-accent transition duration-300", {
+							"bg-accent-foreground text-accent hover:bg-accent-foreground": selected === label,
+						})}
+						href={route}>
+						{t(label)}
+					</Link>
+				))}
+			</div>
 
-				<SelectContent>
-					<SelectGroup className="text-xs">
-						<SelectLabel>{t("title")}</SelectLabel>
-						<SelectItem value="/account">{t("sidebar.account")}</SelectItem>
-						<SelectItem value="/account/orders">{t("sidebar.orders")}</SelectItem>
-						<SelectItem value="/account/wishlist">{t("sidebar.wishlist")}</SelectItem>
-						<SelectItem value="/account/settings">{t("sidebar.settings")}</SelectItem>
-					</SelectGroup>
-				</SelectContent>
-			</Select>
-
-			<div className="flex flex-col gap-2 w-full max-sm:hidden">
+			<div className="flex flex-col gap-2 w-full max-md:hidden">
 				<Link
 					className={cn("px-4 py-2 rounded-md hover:bg-accent transition duration-300", {
 						"bg-accent-foreground text-accent hover:bg-accent-foreground": pathname === "/account",

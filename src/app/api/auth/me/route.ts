@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
 	try {
 		// verify access token
-		const token = request.cookies.get("access_token")?.value;
+		const token = request.cookies.get("access_token")?.value || request.headers.get("Authorization")?.split("Bearer ")[1] || "";
 		if (!token) {
 			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 		}

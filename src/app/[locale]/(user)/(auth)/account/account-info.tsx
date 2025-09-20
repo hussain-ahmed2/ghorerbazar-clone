@@ -45,7 +45,7 @@ export default function AccountInfo() {
 
 	return (
 		<div className="flex-1 h-full flex flex-col">
-			<div className="flex justify-end max-sm:justify-center gap-2 sm:gap-4">
+			<div className="flex justify-end gap-2 sm:gap-4 mb-4">
 				{isEditing && (
 					<>
 						<Button disabled={isPending} className={cn("line-clamp-1 max-sm:text-xs")} variant="default" type="submit" form="account">

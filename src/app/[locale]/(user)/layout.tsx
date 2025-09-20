@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { Noto_Sans_Bengali } from "next/font/google";
 import type { ReactNode } from "react";
-import "../globals.css";
+import "@/app/globals.css";
 import { Metadata } from "next";
 import Navbar from "@/components/navbar/navbar";
 import { getLocale } from "next-intl/server";

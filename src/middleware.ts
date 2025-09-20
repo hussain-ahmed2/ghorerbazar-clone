@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
+import api from "./lib/api";
 
 const private_routes = ["/accounts", "/cart"];
 const public_routes = ["/login", "/signup"];
@@ -8,7 +9,7 @@ const public_routes = ["/login", "/signup"];
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
 	// First, handle internationalization
 	const response = intlMiddleware(request);
 
@@ -39,6 +40,23 @@ export default function middleware(request: NextRequest) {
 		const locale = pathname.match(/^\/(en|bn)/)?.[1] || "en"; // Default to 'en' if no locale found
 		const homeUrl = new URL(`/${locale}`, request.url);
 		return NextResponse.redirect(homeUrl);
+	}
+
+	// Check if the current route is a admin route
+	const isAdminRoute = pathnameWithoutLocale.startsWith("/admin");
+
+	// Redirect to login page if the user is not authenticated and trying to access admin routes
+	if (isAdminRoute && accessToken) {
+		// Check if the current user is an admin
+		const response = await api.get("/auth/me", { headers: { Authorization: `Bearer ${accessToken}` } });
+		const isAdmin = response.data.user.role === "admin";
+
+		if (!isAdmin) {
+			// Preserve the locale when redirecting to login
+			const locale = pathname.match(/^\/(en|bn)/)?.[1] || "en"; // Default to 'en' if no locale found
+			const loginUrl = new URL(`/${locale}`, request.url);
+			return NextResponse.redirect(loginUrl);
+		}
 	}
 
 	// Return the internationalization response if no redirect is needed
